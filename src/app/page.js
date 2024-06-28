@@ -4,7 +4,7 @@ import styles from "./page.module.css";
 
 function Page() {
   const beanVariants = ["Hundemad", "Tandpasta", "Bræk", "Brugt Ble", "Blæksprutte", "Beskidt Bandage", "Carolina Reaper", "Valgfri"];
-  const [bean, setBean] = useState(0);
+  const [bean, setBean] = useState(Math.floor(Math.random() * beanVariants.length));
   const [dogFoodMode, setDogFoodMode] = useState(false);
   const [showDogMode, setShowDogMode] = useState(false);
   const [spinning, setSpinning] = useState(false);
