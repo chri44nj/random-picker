@@ -46,7 +46,11 @@ function Page() {
   return (
     <>
       <main className={styles.mainWrapper} onDoubleClick={() => setShowDogMode((old) => !old)}>
-        {showDogMode && <p className={`${styles.dogFoodModeText} ${dogFoodMode ? styles.greenText : styles.redText}`}>Dog-Food-Mode: {dogFoodMode ? "Activated" : "Deactivated"}</p>}
+        {showDogMode && (
+          <p className={styles.dogFoodModeText}>
+            Dog-Food-Mode: <span className={dogFoodMode ? styles.greenText : styles.redText}>{dogFoodMode ? "Activated" : "Deactivated"}</span>
+          </p>
+        )}
         <h1 className={`${styles.beanHeading} ${spinning && styles.spinningBean}`} onClick={() => setDogFoodMode((old) => !old)}>
           {beanVariants[bean]}
         </h1>
