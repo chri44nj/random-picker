@@ -1,95 +1,62 @@
-import Image from "next/image";
+"use client";
+import { useState, useEffect } from "react";
 import styles from "./page.module.css";
 
-export default function Home() {
+function Page() {
+  const beanVariants = ["Hundemad", "Tandpasta", "Bræk", "Brugt Ble", "Blæksprutte", "Beskidt Bandage", "Carolina Reaper", "Valgfri"];
+  const [bean, setBean] = useState(0);
+  const [dogFoodMode, setDogFoodMode] = useState(false);
+  const [showDogMode, setShowDogMode] = useState(false);
+  const [spinning, setSpinning] = useState(false);
+
+  const spinWheel = () => {
+    if (!spinning) {
+      setSpinning(true);
+
+      // Simulate spinning effect with setTimeout
+      let delay = 100; // Initial delay before cycling starts
+      let cycleCount = 10; // Number of cycles before settling on a random number
+      let cycleIndex = 0;
+
+      const cycleNext = () => {
+        setTimeout(() => {
+          setBean(cycleIndex % beanVariants.length); // Cycling through beanVariants
+          cycleIndex++;
+
+          if (cycleIndex < cycleCount) {
+            cycleNext();
+          } else {
+            if (dogFoodMode) {
+              setBean(0);
+              setSpinning(false);
+            } else {
+              let randomNumber = Math.floor(Math.random() * beanVariants.length);
+              setBean(randomNumber);
+              setSpinning(false);
+            }
+          }
+        }, delay);
+        delay += 50; // Increase delay for each cycle to create a sense of animation
+      };
+
+      cycleNext();
+    }
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    <>
+      <main className={styles.mainWrapper} onDoubleClick={() => setShowDogMode((old) => !old)}>
+        {showDogMode && <p className={`${styles.dogFoodModeText} ${dogFoodMode ? styles.greenText : styles.redText}`}>Dog-Food-Mode: {dogFoodMode ? "Activated" : "Deactivated"}</p>}
+        <h1 className={`${styles.beanHeading} ${spinning && styles.spinningBean}`} onClick={() => setDogFoodMode((old) => !old)}>
+          {beanVariants[bean]}
+        </h1>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+        <button className={`${styles.spinButton} ${spinning && styles.spinning} ${dogFoodMode && styles.dogFoodMode}`} onClick={spinWheel} disabled={spinning}>
+          {spinning ? "Spinning..." : "Spin"}
+        </button>
+      </main>
+    </>
   );
 }
+
+export default Page;
