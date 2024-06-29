@@ -8,9 +8,38 @@
   align-items: center;
 }
 
+.numberOfSpins {
+  background-color: rgb(168, 0, 0);
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+
+.participant {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
 .dogFoodModeText {
   position: absolute;
-  top: 2rem;
+  bottom: 6rem;
   font-weight: bold;
 }
 
@@ -27,6 +56,11 @@
   font-size: 2rem;
 }
 
+.winner {
+  color: rgba(255, 225, 0, 0.949);
+  text-transform: uppercase;
+}
+
 .spinningBean {
   color: rgb(168, 0, 0);
 }
@@ -36,8 +70,8 @@
   padding: 0.5rem 2rem;
   bottom: 2rem;
   border-radius: 10px;
-  background-color: white;
-  color: black;
+  background-color: rgb(168, 0, 0);
+  color: white;
   font-weight: bold;
   border: none;
   min-width: 200px;
@@ -49,7 +83,19 @@
   background-color: rgb(234, 234, 234);
 }
 
+.winnerSpinner {
+  background-color: rgba(255, 225, 0, 0.949);
+  color: white;
+}
+
 .spinning {
   background-color: rgb(168, 0, 0);
   color: white;
+}
+
+.chicken {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  bottom: 6rem;
 }
