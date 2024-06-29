@@ -118,11 +118,11 @@ function Page() {
         </h1>
         {mustChoose && participants[currentParticipant].chickens > 0 ? <img className={styles.chicken} src="/pics/chicken.png" onClick={() => handleClick("chicken")} alt="Chicken" /> : null}
         {mustChoose ? (
-          <button className={`${styles.spinButton} ${spinning && styles.spinning} ${dogFoodMode && styles.dogFoodMode} ${bean === 7 && styles.winnerSpinner}`} onClick={() => handleClick("man")} disabled={spinning}>
+          <button className={`${styles.spinButton} ${spinning && styles.spinning} ${dogFoodMode && styles.dogFoodMode} ${bean === 7 && styles.winnerSpinner}`} onMouseDown={() => handleClick("man")} disabled={spinning}>
             Ja tak!
           </button>
         ) : (
-          <button className={`${styles.spinButton} ${spinning && styles.spinning} ${dogFoodMode && styles.dogFoodMode} ${bean === 7 && styles.winnerSpinner}`} onClick={spinWheel} disabled={spinning}>
+          <button className={`${styles.spinButton} ${spinning && styles.spinning} ${dogFoodMode && styles.dogFoodMode} ${bean === 7 && styles.winnerSpinner}`} onMouseDown={spinWheel} disabled={spinning}>
             {spinning ? "Spinning..." : "Spin"}
           </button>
         )}
